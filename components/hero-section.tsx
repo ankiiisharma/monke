@@ -106,50 +106,43 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="section relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="section relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20 px-4"
     >
       {/* Background Gradient */}
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-black via-[#111111] to-[#0A0A0A]"></div>
 
       {/* Hero Content */}
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="text-center md:text-left">
-            <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
+      <div className="container mx-auto relative z-10">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+          <div className="text-center md:text-left pb-8 md:pb-0">
+            <h1 className="hero-title text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 text-white leading-tight">
               <span className="block">Amplifying</span>
               <span className="text-primary">Creators</span>
               <span className="block">& Brands</span>
             </h1>
 
-            <p className="hero-subtitle text-xl md:text-2xl text-white/80 mb-8 max-w-2xl mx-auto md:mx-0">
+            <p className="hero-subtitle text-lg sm:text-xl md:text-2xl text-white/80 mb-6 md:mb-8 max-w-2xl mx-auto md:mx-0">
               A 360° creative digital media organization bringing together
               Talent Management, Video Production, Social Media Management, and
               Influencer Marketing.
             </p>
 
-            <div className="hero-cta flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            <div className="hero-cta flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-start">
               <Button
                 size="lg"
-                className="bg-primary text-black hover:bg-primary/90 text-lg font-semibold"
+                className="bg-primary text-black hover:bg-primary/90 text-base md:text-lg font-semibold w-full sm:w-auto"
                 onClick={() => {
                   window.location.href = "/case-studies";
                 }}
               >
-                Read the case studies of our previous works
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <span className="truncate">Read the case studies</span>
+                <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
               </Button>
-              {/* <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 text-lg"
-              >
-                Meet Our Talent
-              </Button> */}
             </div>
           </div>
 
-          {/* Bento Grid of Images */}
-          <div className="hidden md:grid grid-cols-4 gap-6 relative">
+          {/* Bento Grid of Images - Only visible on md and above */}
+          <div className="hidden md:grid grid-cols-4 gap-4 md:gap-6 relative">
             <div className="bento-image bento-image-1 col-span-2 row-span-2 rounded-2xl overflow-hidden h-80 transform transition-transform duration-700 hover:scale-105 hover:z-10  border  border-slate-600/90">
               <Image
                 src="https://media.licdn.com/dms/image/v2/D4D22AQFJXKadlvleMg/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1717598561725?e=1745452800&v=beta&t=EfZqTQHa5Ys2hXuJLcJFjTsUR-f1v87Hm2bAXA8yp44"
@@ -194,18 +187,6 @@ export function HeroSection() {
             <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-primary/30 blur-3xl animate-pulse"></div>
             <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-primary/20 blur-3xl animate-pulse"></div>
           </div>
-
-          {/* Swapping Animation */}
-          <style jsx>{`
-            .bento-image:hover {
-              z-index: 10;
-            }
-            .bento-image:nth-child(1):hover ~ .bento-image:nth-child(2),
-            .bento-image:nth-child(2):hover ~ .bento-image:nth-child(3),
-            .bento-image:nth-child(3):hover ~ .bento-image:nth-child(4) {
-              transform: translateX(10px);
-            }
-          `}</style>
         </div>
       </div>
     </section>

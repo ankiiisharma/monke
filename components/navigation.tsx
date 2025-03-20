@@ -23,19 +23,26 @@ export function Navigation() {
   }, [scrolled]);
 
   useEffect(() => {
+    // Lock body scroll when menu is open
     if (isOpen) {
-      // Animate menu items when menu opens
+      document.body.style.overflow = "hidden";
       gsap.fromTo(
         ".menu-item",
         { opacity: 0, y: 20 },
         {
           opacity: 1,
           y: 0,
-          stagger: 0.1,
-          ease: "power3.out",
+          stagger: 0.08,
+          ease: "power2.out",
+          duration: 0.5,
         }
       );
+    } else {
+      document.body.style.overflow = "unset";
     }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [isOpen]);
 
   return (
@@ -110,47 +117,41 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed inset-0 bg-black z-40 flex flex-col items-center justify-center transition-transform duration-500 ${
-            isOpen ? "translate-x-0" : "translate-x-full"
+          className={`fixed inset-0 bg-gradient-to-b from-black to-zinc-900 z-40 transition-all duration-500 ${
+            isOpen
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
           }`}
         >
-          <nav className="flex flex-col items-center space-y-8">
-            <Link
-              href="#work"
-              className="menu-item text-white hover:text-primary text-2xl transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Work
-            </Link>
-            <Link
-              href="#brands"
-              className="menu-item text-white hover:text-primary text-2xl transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Brands
-            </Link>
-            <Link
-              href="#influencers"
-              className="menu-item text-white hover:text-primary text-2xl transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Creators
-            </Link>
-            <Link
-              href="#team"
-              className="menu-item text-white hover:text-primary text-2xl transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Team
-            </Link>
-            <Link
-              href="/case-studies"
-              className="menu-item text-white hover:text-primary text-2xl transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Case Studies
-            </Link>
-          </nav>
+          <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:32px_32px]" />
+          <div className="h-full flex flex-col justify-center px-8">
+            <nav className="space-y-6">
+              {[
+                { href: "#work", label: "Work" },
+                { href: "#brands", label: "Brands" },
+                { href: "#influencers", label: "Creators" },
+                { href: "#team", label: "Team" },
+                { href: "/case-studies", label: "Case Studies" },
+              ].map((item, index) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="menu-item group relative flex items-center text-2xl sm:text-3xl text-zinc-400 font-medium transition-colors hover:text-white"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span className="relative">
+                    {item.label}
+                    <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
+                  </span>
+                  <ArrowUpRight className="ml-2 h-5 w-5 opacity-0 -translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1" />
+                </Link>
+              ))}
+            </nav>
+
+            <div className="absolute bottom-12 left-0 w-full px-8">
+              <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
+            </div>
+          </div>
         </div>
       </div>
     </header>
